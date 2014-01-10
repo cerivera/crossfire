@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Builder Version</key>
+        <string>8536.30.1</string>
+        <key>CFBundleDisplayName</key>
+        <string>(set LABEL in bin/settings.py)</string>
+        <key>CFBundleIdentifier</key>
+        <string>(set BUNDLE_ID in bin/settings.py)</string>
+        <key>CFBundleInfoDictionaryVersion</key>
+        <string>6.0</string>
+        <key>CFBundleShortVersionString</key>
+        <string>(set VERSION in bin/settings.py)</string>
+        <key>CFBundleVersion</key>
+        <string>(set VERSION in bin/settings.py)</string>
+        <key>Chrome</key>
+        <dict>
+            <key>Database Quota</key>
+            <real>10485760</real>
+            <key>Global Page</key>
+            <string>templates/global.html</string>
+            <key>Popovers</key>
+            <array>
+                <dict>
+                    <key>Filename</key>
+                    <string>templates/popup.html</string>
+                    <key>Identifier</key>
+                    <string>popover</string>
+                    <key>Height</key>
+                    <real>150</real>
+                    <key>Width</key>
+                    <real>175</real>
+                </dict>
+            </array>
+            <key>Toolbar Items</key>
+            <array>
+                <dict>
+                    <key>Command</key>
+                    <string>start_command</string>
+                    <key>Identifier</key>
+                    <string>start_command</string>
+                    <key>Image</key>
+                    <string>images/icons/icon-enabled-32.png</string>
+                    <key>Label</key>
+                    <string>(set LABEL in bin/settings.py)</string>
+                    <key>Popover</key>
+                    <string>popover</string>
+                </dict>
+            </array>
+        </dict>
+        <key>Content</key>
+        <dict>
+            <key>Scripts</key>
+            <dict>
+                <key>End</key>
+                <array>
+                    <string>js/content-scripts/constants.js</string>
+                    <string>js/content-scripts/logger.js</string>
+                    <string>js/content-scripts/extension_api/safari.js</string>
+                    <string>js/content-scripts/draw/notifications.js</string>
+                    <string>js/content-scripts/app.js</string>
+                </array>
+            </dict>
+            <key>Stylesheets</key>
+            <array>
+                <string>css/main.css</string>
+                <string>css/safari.css</string>
+            </array>
+        </dict>
+        <key>Description</key>
+        <string>(set DESCRIPTION in bin/settings.py)</string>
+        <key>ExtensionInfoDictionaryVersion</key>
+        <string>1.0</string>
+        <key>Permissions</key>
+        <dict>
+            <key>Website Access</key>
+            <dict>
+                <key>Include Secure Pages</key>
+                <true/>
+                <key>Level</key>
+                <string>All</string>
+            </dict>
+        </dict>
+        <key>Website</key>
+        <string>(set WEBSITE in bin/settings.py)</string>
+    </dict>
+</plist>

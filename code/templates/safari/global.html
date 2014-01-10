@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>OneID QuickFill - global HTML page</title>
+        <script src="../js/bg/lib/jquery.js"></script>
+        <script src="../js/bg/lib/underscore.js"></script>
+        <script src="../js/bg/lib/jquery-ext.js"></script>
+        <script src="../js/bg/constants.js"></script>
+        <script src="../js/bg/logger.js"></script>
+        <script src="../js/bg/cache/local_storage.js"></script>
+        <script src="../js/bg/cache/cache.js"></script>
+        <script src="../js/bg/sites/rules.js"></script>
+        <script src="../js/bg/sites/stencil.js"></script>
+        <script src="../js/bg/util.js"></script>
+        <script src="../js/bg/extension_api/safari.js"></script>
+        <script src="../js/bg/app.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // settings mapped to local storage
+            safari.extension.settings.addEventListener("change", function(event){
+                if (event.key === "reminder") { 
+                    Cache.setOptionValue('ocrx-remind', event.newValue);
+                }
+            }, false);
+
+            App.init();
+        </script>
+    </body>
+</html>

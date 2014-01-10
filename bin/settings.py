@@ -1,0 +1,7 @@
+CODE_NAME = "myapp"
+LABEL = "My App"
+DESCRIPTION = "My description."
+VERSION = "0.1"
+WEBSITE = "http://www.example.com"
+AUTHOR = "Crossfire Team"
+BUNDLE_ID = "com.crossfire.myapp"

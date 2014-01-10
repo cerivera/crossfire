@@ -1,0 +1,57 @@
+{
+    "name": "(set LABEL in bin/settings.py)",
+    "version": "(set VERSION in bin/settings.py)",
+    "manifest_version": 2,
+    "description": "(set DESCRIPTION in bin/settings.py)",
+    "background":{
+        "scripts" : [
+            "js/background/constants.js",
+            "js/background/logger.js",
+            "js/background/cache/local_storage.js", 
+            "js/background/cache/cache.js", 
+            "js/background/extension_api/chrome.js", 
+            "js/background/app.js",
+            "js/background/background.js"],
+        "persistent": false
+    },
+    "permissions" : [
+        "tabs",
+        "http://*/*",
+        "https://*/*",
+        "storage"
+    ],
+    "browser_action": {
+        "default_icon": {
+            "19": "images/icons/icon-enabled-19.png",
+            "38": "images/icons/icon-enabled-38.png"
+        },
+        "default_title": "(set LABEL in bin/settings.py)",
+        "default_popup" : "templates/popup.html"
+    },
+    "icons": { 
+        "16": "images/icons/icon-enabled-16.png",
+        "48": "images/icons/icon-enabled-48.png",
+        "128": "images/icons/icon-enabled-128.png"
+    },
+    "homepage_url" : "(set WEBSITE in bin/settings.py)",
+    "options_page": "templates/options.html",
+    "content_scripts":[
+        {
+            "matches":["http://*/*", "https://*/*"],
+            "js":[
+                "js/content-scripts/constants.js",
+                "js/content-scripts/logger.js",
+                "js/content-scripts/extension_api/chrome.js", 
+                "js/content-scripts/draw/notifications.js", 
+                "js/content-scripts/app.js",
+            "css": ["css/main.css", "css/chrome.css"],
+            "run_at":"document_idle",
+            "all_frames": true
+        }
+    ], 
+    "web_accessible_resources": [
+        "images/icon-close.png",
+        "images/icon-logo.png",
+        "images/remove.png"
+    ]
+}

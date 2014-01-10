@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="../css/popup.css" rel="stylesheet">
+        <!-- paths valid only for safari and chrome -->
+        <script src="../js/bg/lib/jquery.js"></script>
+        <script src="../js/bg/constants.js"></script>
+        <script src="../js/bg/popup.js"></script>
+    </head>
+    <body class="popup" data-panel-active="menu">
+
+        <div class="popup-panel popup-panel-menu">
+            <a href="#" class="button button-menu button-border" id="fill">
+                <i class="icon-magic"></i>
+                <span class="button-text">Fill fields</span>
+            </a>
+            <a href="#" class="button button-menu button-border" id="pw">
+                <i class="icon-magic"></i>
+                <span class="button-text">PW (testing)</span>
+            </a>
+            <a href="#" class="button button-menu button-border" id="dashboard">
+                <i class="icon-cogs"></i>
+                <span class="button-text">Go to Dashboard</span>
+            </a>
+            <a href="#" class="button button-menu button-border" id="feedback">
+                <i class="icon-comment"></i>
+                <span class="button-text">Give feedback</span>
+            </a>
+        </div>
+
+        <div class="popup-panel popup-panel-feedback">
+            <p>Suggestions? Find a bug? Let us know!</p>
+            <div class="expand"><div class="expand-inner"><textarea placeholder="Type your message here."></textarea></div></div>
+            <a href="#" class="button button-2 button-left" id="feedback-back">
+                <i class="icon-left"></i>
+                <span class="button-text">Nvm, go back</span>
+            </a>
+            <a href="#" class="button button-2 button-right" id="feedback-send">
+                <span class="button-text">Submit feedback</span>
+                <i class="icon-right"></i>
+            </a>
+        </div>
+
+        <div class="popup-panel popup-panel-feedback-sent">
+            <div class="status status-submitting">
+                <i class="status-icon icon-spinner"></i>
+                <p class="status-text">Submitting your feedback...</p>
+            </div>
+            <div class="status status-received hide">
+                <i class="status-icon icon-check"></i>
+                <p class="status-text">Thanks!<br />We have received your feedback.</p>
+            </div>
+        </div>
+
+    </body>
+</html>
