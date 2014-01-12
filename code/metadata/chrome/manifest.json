@@ -31,7 +31,6 @@
         "128": "images/icons/icon-enabled-128.png"
     },
     "homepage_url" : "(set WEBSITE in bin/settings.py)",
-    "options_page": "templates/options.html",
     "content_scripts":[
         {
             "matches":["http://*/*", "https://*/*"],
@@ -39,7 +38,6 @@
                 "js/content-scripts/constants.js",
                 "js/content-scripts/extension_api/chrome.js", 
                 "js/content-scripts/app.js"],
-            "css": ["css/main.css", "css/chrome.css"],
             "run_at":"document_idle",
             "all_frames": true
         }
