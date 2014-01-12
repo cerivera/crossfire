@@ -13,8 +13,7 @@ var ExtensionApi = (function() {
         _data.url("js/extension_api/firefox.js"),
         _data.url("js/app.js")];
     
-    var _cssScripts = [
-        _data.url("css/firefox.css")];
+    var _cssScripts = [];
 
 
     _listeners = {};

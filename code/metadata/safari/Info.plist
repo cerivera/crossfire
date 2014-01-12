@@ -60,11 +60,6 @@
                     <string>js/content-scripts/app.js</string>
                 </array>
             </dict>
-            <key>Stylesheets</key>
-            <array>
-                <string>css/main.css</string>
-                <string>css/safari.css</string>
-            </array>
         </dict>
         <key>Description</key>
         <string>(set DESCRIPTION in bin/settings.py)</string>
