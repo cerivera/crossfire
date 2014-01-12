@@ -31,9 +31,6 @@ var ExtensionApi = (function() {
             if (!_listenerInitialized) {
                 _initListener();
             }
-        },
-        getUrl : function(asset) {
-            return safari.extension.baseURI + asset;
         }
     };
 })();

@@ -28,10 +28,6 @@ var ExtensionApi = (function() {
             if (!_listenerInitialized) {
                 _initListener();
             }
-        },
-        
-        getUrl : function(asset) {
-            return chrome.extension.getURL(asset);
         }
     };
 })();

@@ -1,7 +1,5 @@
 // API sepific to the platform the extension lives on.  Mainly used to communicate with Background world. 
 var ExtensionApi = (function() {
-    var _dataUrl = undefined;
-
     return {
         sendMessage : function(name, data) {
             data = data || {};
@@ -16,9 +14,6 @@ var ExtensionApi = (function() {
                 }
                 callback(request);
             });
-        },
-        getUrl : function(asset) {
-            return (_dataUrl ? _dataUrl : '') + asset;
         }
     };
 })();

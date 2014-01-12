@@ -56,9 +56,7 @@
                 <key>End</key>
                 <array>
                     <string>js/content-scripts/constants.js</string>
-                    <string>js/content-scripts/logger.js</string>
                     <string>js/content-scripts/extension_api/safari.js</string>
-                    <string>js/content-scripts/draw/notifications.js</string>
                     <string>js/content-scripts/app.js</string>
                 </array>
             </dict>
