@@ -1,27 +1,20 @@
-if (typeof require !== 'undefined') {
-    var _ = require("../lib/underscore");
-}
-
 var ExtensionApi = (function() {
+    var _ = require("../lib/underscore");
     var _tabs = require("sdk/tabs");
     var _self = require("sdk/self");
     var _data = _self.data;
-    var _sp = require("sdk/simple-prefs");
-    var _timers = require("sdk/timers");
-    var _panel = require("sdk/panel");
     var _onClickCallback = null;
-    var _onTabReadyCallback = null;
     var _workers = {};
 
     var _commonScripts = [
         _data.url("js/lib/underscore.js"),
         _data.url("js/lib/extend.js"),
         _data.url("js/constants.js"),
-        _data.url("js/extension_api/mozilla.js"),
+        _data.url("js/extension_api/firefox.js"),
         _data.url("js/app.js")];
     
     var _cssScripts = [
-        _data.url("css/mozilla.css")];
+        _data.url("css/firefox.css")];
 
 
     _listeners = {};
@@ -94,6 +87,11 @@ var ExtensionApi = (function() {
             callback(_tabs.activeTab);
         },
 
+        // Setups up listener for icon click.  Sends current tab to callback.
+        onClick : function(callback) {
+            _onClickCallback = callback;
+        },
+
         enableIcon : function(tab) {
             _tbb.image = _data.url("images/icons/icon-enabled-32.png");
         },
@@ -104,6 +102,4 @@ var ExtensionApi = (function() {
     };
 })();
 
-if (typeof require !== 'undefined') {
-    exports.ExtensionApi = ExtensionApi;
-}
+exports.ExtensionApi = ExtensionApi;
