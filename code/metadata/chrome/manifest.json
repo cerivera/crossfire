@@ -43,7 +43,7 @@
                 "js/content-scripts/logger.js",
                 "js/content-scripts/extension_api/chrome.js", 
                 "js/content-scripts/draw/notifications.js", 
-                "js/content-scripts/app.js",
+                "js/content-scripts/app.js"],
             "css": ["css/main.css", "css/chrome.css"],
             "run_at":"document_idle",
             "all_frames": true
