@@ -19,13 +19,13 @@ var App = (function() {
             });
 
             // Listen for message from content scripts
-            ExtensionApi.onMessage("open-link", function(request, tab) {
-                ExtensionApi.openLinkInNewTab(request.url);
+            ExtensionApi.onMessage("do-something-bg", function(request, tab) {
+                alert("Doing something in the Background");
             });
 
             // Listen for icon click
             ExtensionApi.onClick(function(tab) {
-                ExtensionApi.sendMessage(tab, "do-something");
+                ExtensionApi.sendMessage(tab, "do-something-cs");
             });
         }
     }
