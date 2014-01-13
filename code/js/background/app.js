@@ -14,7 +14,9 @@ var App = (function() {
 
     return {
         init : function(options) {
-            ExtensionApi.enableIcon(tab);
+            ExtensionApi.getCurrentTab(function(tab) {
+                ExtensionApi.enableIcon(tab);
+            });
 
             // Listen for message from content scripts
             ExtensionApi.onMessage("open-link", function(request, tab) {

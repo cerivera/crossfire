@@ -22,8 +22,7 @@
             "19": "images/icons/icon-enabled-19.png",
             "38": "images/icons/icon-enabled-38.png"
         },
-        "default_title": "(set LABEL in bin/settings.py)",
-        "default_popup" : "templates/popup.html"
+        "default_title": "(set LABEL in bin/settings.py)"
     },
     "icons": { 
         "16": "images/icons/icon-enabled-16.png",

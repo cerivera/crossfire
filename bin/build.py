@@ -76,9 +76,9 @@ class BuildBaseController(controller.CementBaseController):
         util.update_json_file(self.b('chrome/manifest.json'), {
             "version": settings.VERSION,
             "name": settings.LABEL,
-            "browser_action" : {
-                "default_title": settings.LABEL
-            },
+            #"browser_action" : {
+            #    "default_title": settings.LABEL
+            #},
             "description": settings.DESCRIPTION,
             "homepage_url": settings.WEBSITE
         })

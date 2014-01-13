@@ -4,6 +4,7 @@ from plistlib import readPlist, writePlist
 
 def update_json_file(_file, dict):
     manifest = json.loads(open(_file, 'r').read())
+    # TODO nested JSON objects are overriding complete objects
     manifest.update(dict)
 
     f_w = open(_file, 'w')
