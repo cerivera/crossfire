@@ -27,8 +27,8 @@ var ExtensionApi = (function() {
     }
 
     var _tbb = _toolbar.ToolbarButton({
-        id: "oneid-button",
-        label: "OneID QuickFill",
+        id: "myapp-button",
+        label: "My App",
         image: _data.url("images/icons/default/enabled/32x32.png"),
         onCommand: function(){
             if (_.isFunction(_onClickCallback)) {
