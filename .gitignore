@@ -1,3 +1,4 @@
 *.pyc
 builds
 sandbox
+.idea

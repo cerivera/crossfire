@@ -19,15 +19,15 @@
     ],
     "browser_action": {
         "default_icon": {
-            "19": "images/icons/icon-enabled-19.png",
-            "38": "images/icons/icon-enabled-38.png"
+            "19": "images/icons/default/enabled/19x19.png",
+            "38": "images/icons/default/enabled/38x38.png"
         },
         "default_title": "(set LABEL in bin/settings.py)"
     },
     "icons": { 
-        "16": "images/icons/icon-enabled-16.png",
-        "48": "images/icons/icon-enabled-48.png",
-        "128": "images/icons/icon-enabled-128.png"
+        "16": "images/icons/default/enabled/16x16.png",
+        "48": "images/icons/default/enabled/48x48.png",
+        "128": "images/icons/default/enabled/128x128.png"
     },
     "homepage_url" : "(set WEBSITE in bin/settings.py)",
     "content_scripts":[
@@ -40,10 +40,5 @@
             "run_at":"document_idle",
             "all_frames": true
         }
-    ], 
-    "web_accessible_resources": [
-        "images/icon-close.png",
-        "images/icon-logo.png",
-        "images/remove.png"
     ]
 }

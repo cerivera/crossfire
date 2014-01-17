@@ -29,7 +29,7 @@ var ExtensionApi = (function() {
     var _tbb = _toolbar.ToolbarButton({
         id: "oneid-button",
         label: "OneID QuickFill",
-        image: _data.url("images/icons/icon-enabled-32.png"),
+        image: _data.url("images/icons/default/enabled/32x32.png"),
         onCommand: function(){
             if (_.isFunction(_onClickCallback)) {
                 ExtensionApi.getCurrentTab(_onClickCallback);
@@ -92,11 +92,11 @@ var ExtensionApi = (function() {
         },
 
         enableIcon : function(tab) {
-            _tbb.image = _data.url("images/icons/icon-enabled-32.png");
+            _tbb.image = _data.url("images/icons/default/enabled/32x32.png");
         },
 
         disableIcon : function(tab) {
-            _tbb.image = _data.url("images/icons/icon-disabled-32.png");
+            _tbb.image = _data.url("images/icons/default/disabled/32x32.png");
         }
     };
 })();

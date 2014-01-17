@@ -1,7 +1,6 @@
 import sh, util, settings
 from cement.core import foundation, controller
 from path import path
-from subprocess import call
 
 class BuildBaseController(controller.CementBaseController):
     class Meta:
@@ -32,7 +31,7 @@ class BuildBaseController(controller.CementBaseController):
         self.log.info("Compiling constants JS")
         tpl_data = {
             "DEBUG_MODE" : "true" if self.pargs.debug_mode else "false",
-            "VERSION" : settings.VERSION
+            "VERSION": settings.VERSION
         }
         util.process_tpl(
             "%s/constants.js.tpl" % self.s('js/common'),
@@ -49,8 +48,10 @@ class BuildBaseController(controller.CementBaseController):
     def init_paths(self):
         self.log.info("Setting up paths")
 
-        self.paths = {}
-        self.paths['bin'] = path(__file__).dirname().abspath()
+        self.paths = {
+            'bin': path(__file__).dirname().abspath()
+        }
+
         self.paths['root'] = self.paths['bin'].parent
         self.paths['sandbox'] = path(self.paths['root'] + '/sandbox')
         self.paths['code'] = path(self.paths['root'] + '/code')
@@ -109,7 +110,6 @@ class BuildBaseController(controller.CementBaseController):
             "Description": settings.DESCRIPTION
         })
 
-
     def build_firefox(self):
         self.log.info("Building firefox.")
         sh.mkdir(self.b('firefox'))
@@ -140,7 +140,6 @@ class BuildBaseController(controller.CementBaseController):
             "homepage": settings.WEBSITE,
             "description": settings.DESCRIPTION
         })
-
 
     def minify(self):
         self.log.info("Minifying.")

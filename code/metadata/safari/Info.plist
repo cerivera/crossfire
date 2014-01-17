@@ -20,19 +20,6 @@
             <real>10485760</real>
             <key>Global Page</key>
             <string>templates/global.html</string>
-            <key>Popovers</key>
-            <array>
-                <dict>
-                    <key>Filename</key>
-                    <string>templates/popup.html</string>
-                    <key>Identifier</key>
-                    <string>popover</string>
-                    <key>Height</key>
-                    <real>150</real>
-                    <key>Width</key>
-                    <real>175</real>
-                </dict>
-            </array>
             <key>Toolbar Items</key>
             <array>
                 <dict>
@@ -41,7 +28,7 @@
                     <key>Identifier</key>
                     <string>start_command</string>
                     <key>Image</key>
-                    <string>images/icons/icon-enabled-32.png</string>
+                    <string>images/icons/default/enabled/32x32.png</string>
                     <key>Label</key>
                     <string>(set LABEL in bin/settings.py)</string>
                     <key>Popover</key>
