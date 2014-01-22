@@ -7,8 +7,7 @@
         "scripts" : [
             "js/background/constants.js",
             "js/background/extension_api/chrome.js", 
-            "js/background/app.js",
-            "js/background/background.js"],
+            "js/background/app.js"],
         "persistent": false
     },
     "permissions" : [

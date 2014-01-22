@@ -1,4 +1,4 @@
-import sh, glob, subprocess, urllib2, json, re
+import sh, glob, urllib2, json, re
 from path import path
 from plistlib import readPlist, writePlist
 

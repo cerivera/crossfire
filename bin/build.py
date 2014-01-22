@@ -1,6 +1,10 @@
-import sh, util, settings
+import sh
+import util
+import settings
 from cement.core import foundation, controller
 from path import path
+from jinja2 import Template
+
 
 class BuildBaseController(controller.CementBaseController):
     class Meta:
@@ -128,6 +132,8 @@ class BuildBaseController(controller.CementBaseController):
         sh.mkdir(self.b('firefox/lib'))
         util.cp(self.s('js/common/*'), self.b('firefox/lib'))
         util.cp(self.s('js/background/*'), self.b('firefox/lib'))
+        # TODO firefox may require we call it main.js
+        util.cp(self.b('firefox/lib/app.js'), self.b('firefox/lib/main.js'))
 
         # Metadata
         util.cp(self.s('metadata/firefox/*'), self.b('firefox'))

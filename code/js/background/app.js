@@ -22,3 +22,8 @@ var App = (function() {
 if (typeof require !== 'undefined') {
     exports.App = App;
 }
+
+App.init();
+
+
+
