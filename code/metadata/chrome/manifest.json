@@ -7,7 +7,7 @@
         "scripts" : [
             "js/background/constants.js",
             "js/background/extension_api/chrome.js", 
-            "js/background/app.js"],
+            "js/background/main.js"],
         "persistent": false
     },
     "permissions" : [
@@ -18,15 +18,15 @@
     ],
     "browser_action": {
         "default_icon": {
-            "19": "images/icons/default/enabled/19x19.png",
-            "38": "images/icons/default/enabled/38x38.png"
+            "19": "images/icons/default/19x19.png",
+            "38": "images/icons/default/38x38.png"
         },
         "default_title": "(set LABEL in bin/settings.py)"
     },
     "icons": { 
-        "16": "images/icons/default/enabled/16x16.png",
-        "48": "images/icons/default/enabled/48x48.png",
-        "128": "images/icons/default/enabled/128x128.png"
+        "16": "images/icons/default/16x16.png",
+        "48": "images/icons/default/48x48.png",
+        "128": "images/icons/default/128x128.png"
     },
     "homepage_url" : "(set WEBSITE in bin/settings.py)",
     "content_scripts":[
@@ -35,7 +35,7 @@
             "js":[
                 "js/content-scripts/constants.js",
                 "js/content-scripts/extension_api/chrome.js", 
-                "js/content-scripts/app.js"],
+                "js/content-scripts/main.js"],
             "run_at":"document_idle",
             "all_frames": true
         }

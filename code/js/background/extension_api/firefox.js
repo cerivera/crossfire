@@ -6,9 +6,7 @@ var ExtensionApi = (function() {
     var _onClickCallback = null;
     var _workers = {};
 
-    var _commonScripts = [
-        _data.url("js/lib/underscore.js"),
-        _data.url("js/lib/extend.js"),
+    var _contentScripts = [
         _data.url("js/constants.js"),
         _data.url("js/extension_api/firefox.js"),
         _data.url("js/app.js")];
@@ -29,7 +27,7 @@ var ExtensionApi = (function() {
     var _tbb = _toolbar.ToolbarButton({
         id: "myapp-button",
         label: "My App",
-        image: _data.url("images/icons/default/enabled/32x32.png"),
+        image: _data.url("images/icons/default/32x32.png"),
         onCommand: function(){
             if (_.isFunction(_onClickCallback)) {
                 ExtensionApi.getCurrentTab(_onClickCallback);
@@ -55,13 +53,13 @@ var ExtensionApi = (function() {
 
     require("sdk/page-mod").PageMod({
         include: ['*'],
-        contentScriptFile: _commonScripts,
+        contentScriptFile: _contentScripts,
         contentStyleFile: _cssScripts,
         attachTo: ['top'],
         onAttach: function(worker) {
             // Ready message that gets fired by all windows (including iframes) whenever it's ready.
             _workers[worker.tab.id] = worker;
-            worker.tab.attach({contentScriptFile: _commonScripts, contentStyleFile: _cssScripts});
+            worker.tab.attach({contentScriptFile: _contentScripts, contentStyleFile: _cssScripts});
             _attachListeners(worker);
             if (_.isFunction(_onTabReadyCallback)) {
                 _onTabReadyCallback(worker.tab);
@@ -92,11 +90,11 @@ var ExtensionApi = (function() {
         },
 
         enableIcon : function(tab) {
-            _tbb.image = _data.url("images/icons/default/enabled/32x32.png");
+            _tbb.image = _data.url("images/icons/default/32x32.png");
         },
 
         disableIcon : function(tab) {
-            _tbb.image = _data.url("images/icons/default/disabled/32x32.png");
+            _tbb.image = _data.url("images/icons/default/disabled-32x32.png");
         }
     };
 })();

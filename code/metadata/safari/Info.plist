@@ -28,7 +28,7 @@
                     <key>Identifier</key>
                     <string>start_command</string>
                     <key>Image</key>
-                    <string>images/icons/default/enabled/32x32.png</string>
+                    <string>images/icons/default/32x32.png</string>
                     <key>Label</key>
                     <string>(set LABEL in bin/settings.py)</string>
                     <key>Popover</key>
@@ -44,7 +44,7 @@
                 <array>
                     <string>js/content-scripts/constants.js</string>
                     <string>js/content-scripts/extension_api/safari.js</string>
-                    <string>js/content-scripts/app.js</string>
+                    <string>js/content-scripts/main.js</string>
                 </array>
             </dict>
         </dict>
