@@ -1,11 +1,11 @@
 var App = (function() {
     return {
         init : function() {
-           // Messages that come from Background
-            ExtensionApi.onMessage("do-something-cs", function(request) {
+            // Messages that come from Background
+            ExtensionApi.onMessage("doSomethingCs", function(request) {
                 alert("Content Scripts are doing something!  Forcing Background to do something in two seconds..."); 
                 setTimeout(function() {
-                    ExtensionApi.sendMessage("do-something-bg");
+                    ExtensionApi.sendMessage("doSomethingBg");
                 }, 2000);
             });
         }

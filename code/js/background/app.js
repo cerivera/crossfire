@@ -7,13 +7,13 @@ var App = (function() {
     return {
         init : function() {
             // Listen for message from content scripts
-            ExtensionApi.onMessage("do-something-bg", function(request, tab) {
+            ExtensionApi.onMessage("doSomethingBg", function(request, tab) {
                 alert("Doing something in the Background");
             });
 
             // Listen for icon click
             ExtensionApi.onClick(function(tab) {
-                ExtensionApi.sendMessage(tab, "do-something-cs");
+                ExtensionApi.sendMessage(tab, "doSomethingCs");
             });
         }
     }
