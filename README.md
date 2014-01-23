@@ -1,7 +1,7 @@
 crossfire
 =========
 
-A basic framework for creating a simple, multi-platform browser extension.  Supported browsers include: Safari, Chrome, Firefox
+A framework for creating simple, multi-platform browser extension.  Supported browsers: Safari, Chrome, Firefox
 
 How to use
 =========
