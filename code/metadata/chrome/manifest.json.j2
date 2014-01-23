@@ -1,8 +1,8 @@
 {
-    "name": "(set LABEL in bin/settings.py)",
-    "version": "(set VERSION in bin/settings.py)",
+    "name": "{{ settings.label }}",
+    "version": "{{ settings.version }}",
     "manifest_version": 2,
-    "description": "(set DESCRIPTION in bin/settings.py)",
+    "description": "{{ settings.description }}",
     "background":{
         "scripts" : [
             "js/background/constants.js",
@@ -21,14 +21,14 @@
             "19": "images/icons/default/19x19.png",
             "38": "images/icons/default/38x38.png"
         },
-        "default_title": "(set LABEL in bin/settings.py)"
+        "default_title": "{{ settings.label }}"
     },
     "icons": { 
         "16": "images/icons/default/16x16.png",
         "48": "images/icons/default/48x48.png",
         "128": "images/icons/default/128x128.png"
     },
-    "homepage_url" : "(set WEBSITE in bin/settings.py)",
+    "homepage_url" : "{{ settings.website }}",
     "content_scripts":[
         {
             "matches":["http://*/*", "https://*/*"],

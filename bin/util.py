@@ -2,6 +2,7 @@ import sh, glob, urllib2, json, re
 from path import path
 from plistlib import readPlist, writePlist
 
+
 def update_json_file(_file, dict):
     manifest = json.loads(open(_file, 'r').read())
     # TODO nested JSON objects are overriding complete objects
@@ -10,6 +11,7 @@ def update_json_file(_file, dict):
     f_w = open(_file, 'w')
     f_w.write(json.dumps(manifest))
     f_w.close()
+
 
 def update_plist_file(_file, dict):
     pl = readPlist(_file)
@@ -24,12 +26,14 @@ def cp(item, dest):
         else:
             sh.cp(_file, dest)
 
+
 def download_file(remote_src, local_dest):
         print "Downloading '%s' to '%s'" % (remote_src, local_dest)
         download = urllib2.urlopen(remote_src)
         local_file = open(local_dest, 'w')
         local_file.write(download.read())
         local_file.close()
+
 
 def process_tpl(fin, fout, data):
     with open(fout, "w") as out:
@@ -40,4 +44,6 @@ def process_tpl(fin, fout, data):
                 line = re.sub(r'{{\s*%s\s*}}' % key, data[key], line)
             out.write(line)
     out.close()
+
+
 

@@ -1,6 +1,7 @@
 var Constants = (function() {
     return {
-        VERSION : "{{ VERSION }}"
+        DEBUG_MODE: {{ args.debug_mode }},
+        VERSION: "{{ settings.version }}"
     }
 })();
 

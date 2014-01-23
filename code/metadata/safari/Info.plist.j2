@@ -5,15 +5,15 @@
         <key>Builder Version</key>
         <string>8536.30.1</string>
         <key>CFBundleDisplayName</key>
-        <string>(set LABEL in bin/settings.py)</string>
+        <string>{{ settings.label }}</string>
         <key>CFBundleIdentifier</key>
-        <string>(set BUNDLE_ID in bin/settings.py)</string>
+        <string>{{ settings.bundle_id }}</string>
         <key>CFBundleInfoDictionaryVersion</key>
         <string>6.0</string>
         <key>CFBundleShortVersionString</key>
-        <string>(set VERSION in bin/settings.py)</string>
+        <string>{{ settings.version }}</string>
         <key>CFBundleVersion</key>
-        <string>(set VERSION in bin/settings.py)</string>
+        <string>{{ settings.version }}</string>
         <key>Chrome</key>
         <dict>
             <key>Database Quota</key>
@@ -30,7 +30,7 @@
                     <key>Image</key>
                     <string>images/icons/default/32x32.png</string>
                     <key>Label</key>
-                    <string>(set LABEL in bin/settings.py)</string>
+                    <string>{{ settings.label }}</string>
                     <key>Popover</key>
                     <string>popover</string>
                 </dict>
@@ -49,7 +49,7 @@
             </dict>
         </dict>
         <key>Description</key>
-        <string>(set DESCRIPTION in bin/settings.py)</string>
+        <string>{{ settings.description }}</string>
         <key>ExtensionInfoDictionaryVersion</key>
         <string>1.0</string>
         <key>Permissions</key>
@@ -63,6 +63,6 @@
             </dict>
         </dict>
         <key>Website</key>
-        <string>(set WEBSITE in bin/settings.py)</string>
+        <string>{{ settings.website }}</string>
     </dict>
 </plist>

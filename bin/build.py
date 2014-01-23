@@ -1,9 +1,9 @@
 import sh
 import util
-import settings
+from settings import settings
 from cement.core import foundation, controller
 from path import path
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 
 
 class BuildBaseController(controller.CementBaseController):
@@ -28,19 +28,15 @@ class BuildBaseController(controller.CementBaseController):
         sh.rm("-rf", self.paths['sandbox'])
         sh.mkdir(self.paths['builds'])
 
-        # Create sandbox
+        # Create sandbox of our codebase
         util.cp(self.paths['code'], self.paths['sandbox'])
 
-        # Build constants file
-        self.log.info("Compiling constants JS")
-        tpl_data = {
-            "DEBUG_MODE" : "true" if self.pargs.debug_mode else "false",
-            "VERSION": settings.VERSION
-        }
-        util.process_tpl(
-            "%s/constants.js.tpl" % self.s('js/common'),
-            "%s/constants.js" % self.s('js/common'),
-            tpl_data)
+        self.process_jinja2_files({
+            "settings": settings,
+            "args": {
+                "debug_mode" : "true" if self.pargs.debug_mode else "false"
+            }
+        })
 
         # Build extension folders
         self.build_chrome()
@@ -78,15 +74,7 @@ class BuildBaseController(controller.CementBaseController):
         util.cp(self.s('js/content-scripts'), self.b('chrome/js'))
         util.cp(self.s('js/common/*'), self.b('chrome/js/content-scripts'))
 
-        util.update_json_file(self.b('chrome/manifest.json'), {
-            "version": settings.VERSION,
-            "name": settings.LABEL,
-            #"browser_action" : {
-            #    "default_title": settings.LABEL
-            #},
-            "description": settings.DESCRIPTION,
-            "homepage_url": settings.WEBSITE
-        })
+        # update manifest json
 
     def build_safari(self):
         self.log.info("Building safari.")
@@ -105,14 +93,7 @@ class BuildBaseController(controller.CementBaseController):
         util.cp(self.s('js/content-scripts'), self.b('safari/js'))
         util.cp(self.s('js/common/*'), self.b('safari/js/content-scripts'))
 
-        util.update_plist_file(self.b('safari/Info.plist'), {
-            "CFBundleShortVersionString": settings.VERSION,
-            "CFBundleVersion": settings.VERSION,
-            "CFBundleDisplayName": settings.LABEL,
-            "CFBundleIdentifier": settings.BUNDLE_ID,
-            "Website": settings.WEBSITE,
-            "Description": settings.DESCRIPTION
-        })
+        # Update info.plist
 
     def build_firefox(self):
         self.log.info("Building firefox.")
@@ -136,14 +117,7 @@ class BuildBaseController(controller.CementBaseController):
         # Metadata
         util.cp(self.s('metadata/firefox/*'), self.b('firefox'))
 
-        util.update_json_file(self.b('firefox/package.json'), {
-            "name": settings.CODE_NAME,
-            "version": settings.VERSION,
-            "author": settings.AUTHOR,
-            "fullName": settings.LABEL,
-            "homepage": settings.WEBSITE,
-            "description": settings.DESCRIPTION
-        })
+        # update package.json
 
     def minify(self):
         self.log.info("Minifying.")
@@ -159,6 +133,18 @@ class BuildBaseController(controller.CementBaseController):
     # get absolute path in packages/
     def p(self, _path):
         return path(self.paths['packages'] + '/' + _path)
+
+    def process_jinja2_files(self, data):
+        self.log.info("Processing Jinja2 files.")
+        for jf in sh.find(self.paths['sandbox'], "-name", "*.j2"):
+            jf = jf.strip()
+            self.log.info("Processing '%s'" % jf)
+            jf_components = jf.split("/")
+            env = Environment(loader=FileSystemLoader("/".join(jf_components[:-1])), trim_blocks=True)
+            new_file = open(jf.replace(".j2", ""), "w")
+            new_file.write(env.get_template(jf_components[-1]).render(data))
+            new_file.close()
+            sh.rm(jf)
 
 
 class Build(foundation.CementApp):
