@@ -1,15 +1,8 @@
-var App = (function() {
-    return {
-        init : function() {
-            // Messages that come from Background
-            ExtensionApi.onMessage("doSomethingCs", function(request) {
-                alert("Content Scripts are doing something!  Forcing Background to do something in two seconds..."); 
-                setTimeout(function() {
-                    ExtensionApi.sendMessage("doSomethingBg");
-                }, 2000);
-            });
-        }
-    };
-})();
+var api = platforms.getApi();
 
-App.init();
+api.onMessage("doSomethingCs", function(request) {
+    alert("Content Script");
+    setTimeout(function() {
+        api.sendMessage("doSomethingBg");
+    }, 2000);
+});

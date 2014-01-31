@@ -1,5 +1,6 @@
-var ExtensionApi = (function() {
-    var _ = require("../lib/underscore");
+function FirefoxApi() {
+    var self = this;
+
     var _tabs = require("sdk/tabs");
     var _self = require("sdk/self");
     var _data = _self.data;
@@ -13,8 +14,7 @@ var ExtensionApi = (function() {
     
     var _cssScripts = [];
 
-
-    _listeners = {};
+    var _listeners = {};
 
     function _attachListeners(worker) {
         _.each(_listeners, function(callback, msg, list) {
@@ -30,10 +30,9 @@ var ExtensionApi = (function() {
         image: _data.url("images/icons/default/32x32.png"),
         onCommand: function(){
             if (_.isFunction(_onClickCallback)) {
-                ExtensionApi.getCurrentTab(_onClickCallback);
+                self.getCurrentTab(_onClickCallback);
             }
-        },
-        panel: popup
+        }
     });
 
     _tbb.moveTo({toolbarID:"nav-bar", forceMove:false});
@@ -67,36 +66,30 @@ var ExtensionApi = (function() {
         }
     });
 
-    return {
-        // Sends message to CS
-        sendMessage : function(tab, msg, data) {
-            data = data || {};
-            data.data_url = _data.url('');
-            _workers[tab.id].port.emit(msg, data);
-        },
-        
-        // Listens to messages from CS
-        onMessage : function(msg, callback) {
-            _listeners[msg] = callback;
-        },
 
-        getCurrentTab : function (callback) {
-            callback(_tabs.activeTab);
-        },
-
-        // Setups up listener for icon click.  Sends current tab to callback.
-        onClick : function(callback) {
-            _onClickCallback = callback;
-        },
-
-        enableIcon : function(tab) {
-            _tbb.image = _data.url("images/icons/default/32x32.png");
-        },
-
-        disableIcon : function(tab) {
-            _tbb.image = _data.url("images/icons/default/disabled-32x32.png");
-        }
+    this.sendMessage = function(tab, msg, data) {
+        data = data || {};
+        data.data_url = _data.url('');
+        _workers[tab.id].port.emit(msg, data);
     };
-})();
 
-exports.ExtensionApi = ExtensionApi;
+    this.onMessage = function(msg, callback) {
+        _listeners[msg] = callback;
+    };
+
+    this.getCurrentTab = function(callback) {
+        callback(_tabs.activeTab);
+    };
+
+    this.onClick = function(callback) {
+        _onClickCallback = callback;
+    };
+
+    this.enableIcon = function(tab) {
+        _tbb.image = _data.url("images/icons/default/32x32.png");
+    };
+
+    this.disableIcon = function(tab) {
+        _tbb.image = _data.url("images/icons/default/disabled-32x32.png");
+    };
+}

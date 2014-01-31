@@ -6,7 +6,10 @@
     "background":{
         "scripts" : [
             "js/background/constants.js",
-            "js/background/extension_api/chrome.js", 
+            "js/background/api/chrome.js",
+            "js/background/api/firefox.js",
+            "js/background/api/safari.js",
+            "js/background/platforms.js",
             "js/background/main.js"],
         "persistent": false
     },
@@ -34,7 +37,10 @@
             "matches":["http://*/*", "https://*/*"],
             "js":[
                 "js/content-scripts/constants.js",
-                "js/content-scripts/extension_api/chrome.js", 
+                "js/content-scripts/api/chrome.js",
+                "js/content-scripts/api/firefox.js",
+                "js/content-scripts/api/safari.js",
+                "js/content-scripts/platforms.js",
                 "js/content-scripts/main.js"],
             "run_at":"document_idle",
             "all_frames": true
