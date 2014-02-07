@@ -1,6 +1,4 @@
-var platforms = require('./platforms.js').platforms;
-
-var api = platforms.getApi();
+var api = require('./apis.js').apis.get();
 
 api.onMessage("bgDo", function(request, tab) {
    // TODO store something in cache?

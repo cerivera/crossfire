@@ -1,7 +1,8 @@
-var platforms = (function() {
+var apis = (function() {
     var ChromeApi = require('./api/chrome.js').ChromeApi;
     var SafariApi = require('./api/safari.js').SafariApi;
     var FirefoxApi = require('./api/firefox.js').FirefoxApi;
+
     var instance;
 
     function init() {
@@ -15,7 +16,7 @@ var platforms = (function() {
     }
 
     return {
-        getApi: function() {
+        get: function() {
             if (!instance) {
                 instance = init();
             }
@@ -25,4 +26,4 @@ var platforms = (function() {
     }
 })();
 
-exports.platforms = platforms;
+exports.apis = apis;
