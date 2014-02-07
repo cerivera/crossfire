@@ -6,6 +6,7 @@ A framework for creating simple, multi-platform browser extension.  Supported br
 Requirements
 =========
 browserify
+
 $npm install browserify
 
 How to use
