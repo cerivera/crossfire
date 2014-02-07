@@ -1,6 +1,7 @@
 var constants = {
-    DEBUG_MODE: {{ args.debug_mode }},
-    VERSION: "{{ settings.version }}"
+    version: '{{ settings.version }}',
+    label: '{{ settings.label }}',
+    codename: '{{ settings.codename }}'
 };
 
 exports.constants = constants;
