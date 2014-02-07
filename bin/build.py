@@ -44,7 +44,7 @@ class BuildBaseController(controller.CementBaseController):
 
         self.paths['root'] = self.paths['bin'].parent
         self.paths['sandbox'] = path(self.paths['root'] + '/sandbox')
-        self.paths['code'] = path(self.paths['root'] + '/code')
+        self.paths['src'] = path(self.paths['root'] + '/src')
         self.paths['builds'] = path(self.paths['root'] + '/builds')
         self.paths['packages'] = path(self.paths['root'] + '/packages')
 
@@ -52,7 +52,7 @@ class BuildBaseController(controller.CementBaseController):
         self.log.info("Building sandbox.");
 
         # Create sandbox of our codebase
-        util.cp(self.paths['code'], self.paths['sandbox'])
+        util.cp(self.paths['src'], self.paths['sandbox'])
         util.cp(self.s('js/common/*'), self.s('js/background'))
         util.cp(self.s('js/common/*'), self.s('js/content-scripts'))
 
