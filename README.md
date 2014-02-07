@@ -3,6 +3,11 @@ crossfire
 
 A framework for creating simple, multi-platform browser extension.  Supported browsers: Safari, Chrome, Firefox
 
+Requirements
+=========
+browserify
+$npm install browserify
+
 How to use
 =========
 Build all extensions with: python bin/build.py
