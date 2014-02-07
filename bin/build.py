@@ -24,6 +24,8 @@ class BuildBaseController(controller.CementBaseController):
     def build(self):
         self.init_paths()
 
+        settings['firefox_id'] = self.get_jid()
+
         sh.rm("-rf", self.paths['builds'])
         sh.rm("-rf", self.paths['sandbox'])
 
@@ -121,6 +123,22 @@ class BuildBaseController(controller.CementBaseController):
         # Metadata
         util.cp(self.s('metadata/firefox/*'), self.b('firefox'))
 
+    def get_jid(self):
+        try:
+            f = open(self.bi('jid'))
+            jid = f.read().strip()
+        except:
+            # Use the addon-sdk to generate a jID for the firefox project
+            import sys
+            sys.path.append(self.bi('firefox/addon-sdk-1.15/python-lib/cuddlefish'))
+            from preflight import create_jid
+            jid = create_jid()
+
+            f = open(self.bi('jid'), 'w') 
+            f.write(jid)
+            f.close()
+
+        return jid
 
     def minify(self):
         self.log.info("Minifying.")
@@ -136,6 +154,10 @@ class BuildBaseController(controller.CementBaseController):
     # get absolute path in packages/
     def p(self, _path):
         return path(self.paths['packages'] + '/' + _path)
+
+    # get absolute path in bin/
+    def bi(self, _path):
+        return path(self.paths['bin'] + '/' + _path)
 
     def process_jinja2_files(self, data):
         self.log.info("Processing Jinja2 files.")
