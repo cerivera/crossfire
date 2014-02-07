@@ -3,8 +3,8 @@ function ChromeApi() {
 
     chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
         if (callbacks[request.msg]) {
-            callbacks[request.msg](request, sender.tab);
             sendResponse({});
+            callbacks[request.msg](request, sender.tab);
         }
     });
 
