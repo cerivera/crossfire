@@ -1,7 +1,7 @@
-var constants = require('../constants').constants;
 
 function FirefoxApi() {
     var self = this;
+    var constants = require('../constants').constants;
     var tabs = require("sdk/tabs");
     var selfData = require("sdk/self").data;
     var widgets = require("sdk/widget");

@@ -1,8 +1,7 @@
-var ChromeApi = require('./api/chrome.js').ChromeApi;
-var SafariApi = require('./api/safari.js').SafariApi;
-var FirefoxApi = require('./api/firefox.js').FirefoxApi;
-
 var platforms = (function() {
+    var ChromeApi = require('./api/chrome.js').ChromeApi;
+    var SafariApi = require('./api/safari.js').SafariApi;
+    var FirefoxApi = require('./api/firefox.js').FirefoxApi;
     var instance;
 
     function init() {
