@@ -11,3 +11,5 @@ FirefoxApi.prototype.sendMessage = function(msg, data) {
 FirefoxApi.prototype.onMessage = function(msg, callback) {
     self.port.on(msg, callback);
 };
+
+exports.FirefoxApi = FirefoxApi;

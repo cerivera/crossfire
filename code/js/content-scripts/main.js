@@ -1,3 +1,5 @@
+var platforms = require('./platforms.js').platforms;
+
 var api = platforms.getApi();
 
 api.onMessage("csDo", function(request) {

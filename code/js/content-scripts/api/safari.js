@@ -24,3 +24,5 @@ SafariApi.prototype.sendMessage = function(msg, data) {
     data.msg = msg;
     safari.self.tab.dispatchMessage("fromInjected", data);
 }
+
+exports.SafariApi = SafariApi;

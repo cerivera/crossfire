@@ -13,7 +13,6 @@ function ChromeApi() {
     };
 }
 
-
 ChromeApi.prototype.sendMessage = function(tab, msg, data) {
     data = data || {};
     data.msg = msg;
@@ -39,3 +38,5 @@ ChromeApi.prototype.enableIcon = function(tab) {
 ChromeApi.prototype.disableIcon = function(tab) {
     chrome.browserAction.disable(tab.id);
 }
+
+exports.ChromeApi = ChromeApi;

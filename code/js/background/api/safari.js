@@ -41,3 +41,5 @@ SafariApi.prototype.enableIcon = function(tab) {
 SafariApi.prototype.disableIcon = function(tab) {
     safari.extension.toolbarItems[0].disabled = true;
 };
+
+exports.SafariApi = SafariApi;

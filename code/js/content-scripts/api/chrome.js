@@ -19,3 +19,5 @@ ChromeApi.prototype.sendMessage = function(msg, data) {
     data.msg = msg;
     chrome.runtime.sendMessage(data);
 }
+
+exports.ChromeApi = ChromeApi;

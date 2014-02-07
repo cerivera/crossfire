@@ -8,9 +8,7 @@ function FirefoxApi() {
     var _workers = {};
 
     var _contentScripts = [
-        _data.url("js/constants.js"),
-        _data.url("js/extension_api/firefox.js"),
-        _data.url("js/app.js")];
+        _data.url("js/bundle.js")];
     
     var _cssScripts = [];
 
@@ -93,3 +91,5 @@ function FirefoxApi() {
         _tbb.image = _data.url("images/icons/default/disabled-32x32.png");
     };
 }
+
+exports.FirefoxApi = FirefoxApi;

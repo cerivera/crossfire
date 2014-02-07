@@ -5,12 +5,7 @@
     "description": "{{ settings.description }}",
     "background":{
         "scripts" : [
-            "js/background/constants.js",
-            "js/background/api/chrome.js",
-            "js/background/api/firefox.js",
-            "js/background/api/safari.js",
-            "js/background/platforms.js",
-            "js/background/main.js"],
+            "js/background/bundle.js"],
         "persistent": false
     },
     "permissions" : [
@@ -36,12 +31,7 @@
         {
             "matches":["http://*/*", "https://*/*"],
             "js":[
-                "js/content-scripts/constants.js",
-                "js/content-scripts/api/chrome.js",
-                "js/content-scripts/api/firefox.js",
-                "js/content-scripts/api/safari.js",
-                "js/content-scripts/platforms.js",
-                "js/content-scripts/main.js"],
+                "js/content-scripts/bundle.js"],
             "run_at":"document_idle",
             "all_frames": true
         }
