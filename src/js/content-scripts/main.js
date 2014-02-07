@@ -1,4 +1,4 @@
-var api = require('./apis.js').apis.get();
+var api = require('./api.js').api.get();
 
 api.onMessage("csDo", function(request) {
     // TODO spit out cached data

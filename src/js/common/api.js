@@ -1,4 +1,4 @@
-var apis = (function() {
+var api = (function() {
     var ChromeApi = require('./api/chrome.js').ChromeApi;
     var SafariApi = require('./api/safari.js').SafariApi;
     var FirefoxApi = require('./api/firefox.js').FirefoxApi;
@@ -26,4 +26,4 @@ var apis = (function() {
     }
 })();
 
-exports.apis = apis;
+exports.api = api;

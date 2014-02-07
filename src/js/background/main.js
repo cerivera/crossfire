@@ -1,4 +1,4 @@
-var api = require('./apis.js').apis.get();
+var api = require('./api.js').api.get();
 
 api.onMessage("bgDo", function(request, tab) {
    // TODO store something in cache?
