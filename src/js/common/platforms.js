@@ -6,9 +6,9 @@ var platforms = (function() {
     var instance;
 
     function init() {
-        if (chrome !== undefined) {
+        if (typeof chrome !== "undefined") {
             return new ChromeApi();
-        } else if (safari !== undefined) {
+        } else if (typeof safari !== "undefined") {
             return new SafariApi();
         } else {
             return new FirefoxApi();

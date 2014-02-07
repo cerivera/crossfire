@@ -5,6 +5,7 @@ from cement.core import foundation, controller
 from path import path
 from jinja2 import Environment, FileSystemLoader
 import os
+from subprocess import call
 
 
 class BuildBaseController(controller.CementBaseController):
@@ -34,6 +35,8 @@ class BuildBaseController(controller.CementBaseController):
         self.build_chrome()
         self.build_safari()
         self.build_firefox()
+
+        self.package_firefox()
 
         sh.rm("-r", self.paths['sandbox'])
 
@@ -122,6 +125,19 @@ class BuildBaseController(controller.CementBaseController):
 
         # Metadata
         util.cp(self.s('metadata/firefox/*'), self.b('firefox'))
+
+
+    def package_firefox(self):
+        self.log.info("Package firefox.")
+        sh.mkdir("-p", self.p('firefox'))
+        call("cd %s;. bin/activate && cd %s; cfx xpi; mv %s.xpi %s/%s.%s.xpi" % (
+            self.bi('/firefox/addon-sdk-1.15'), 
+            self.b('firefox'), 
+            settings['codename'],
+            self.p('firefox'), 
+            settings['codename'],
+            settings['version']
+        ), shell=True)
 
     def get_jid(self):
         try:

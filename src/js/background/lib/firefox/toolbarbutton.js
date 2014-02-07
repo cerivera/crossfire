@@ -2,7 +2,7 @@
 
 const { unload } = require("./vold-utils/unload+");
 const { listen } = require("./vold-utils/listen");
-const winUtils = require("window-utils");
+const winUtils = require("sdk/deprecated/window-utils");
 
 const browserURL = "chrome://browser/content/browser.xul";
 const NS_XUL = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";

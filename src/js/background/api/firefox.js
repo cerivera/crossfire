@@ -1,6 +1,7 @@
 function FirefoxApi() {
     var self = this;
 
+    var _toolbar = require("../lib/firefox/toolbarbutton");
     var _tabs = require("sdk/tabs");
     var _self = require("sdk/self");
     var _data = _self.data;
@@ -15,11 +16,14 @@ function FirefoxApi() {
     var _listeners = {};
 
     function _attachListeners(worker) {
-        _.each(_listeners, function(callback, msg, list) {
+        var keys = Object.keys(_listeners);
+        for(var i = 0; i < keys.length; i++) {
+            var callback = _listeners[keys[i]];
+            var msg = keys[i];
             worker.port.on(msg, function(request, sender) {
                 callback(request, worker.tab);
             });
-        });
+        }
     }
 
     var _tbb = _toolbar.ToolbarButton({
@@ -27,7 +31,7 @@ function FirefoxApi() {
         label: "My App",
         image: _data.url("images/icons/default/32x32.png"),
         onCommand: function(){
-            if (_.isFunction(_onClickCallback)) {
+            if (typeof _onClickCallback === "function") {
                 self.getCurrentTab(_onClickCallback);
             }
         }
@@ -58,7 +62,7 @@ function FirefoxApi() {
             _workers[worker.tab.id] = worker;
             worker.tab.attach({contentScriptFile: _contentScripts, contentStyleFile: _cssScripts});
             _attachListeners(worker);
-            if (_.isFunction(_onTabReadyCallback)) {
+            if (typeof _onTabReadyCallback === "undefined") {
                 _onTabReadyCallback(worker.tab);
             }
         }

@@ -3,9 +3,10 @@ var platforms = require('./platforms.js').platforms;
 var api = platforms.getApi();
 
 api.onMessage("bgDo", function(request, tab) {
-    alert("Doing something in the Background");
+   // TODO store something in cache?
 });
 
 api.onClick(function(tab) {
+    // TODO send cached data
     api.sendMessage(tab, "csDo");
 });
