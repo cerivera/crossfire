@@ -130,7 +130,7 @@ class BuildBaseController(controller.CementBaseController):
     def package_firefox(self):
         self.log.info("Package firefox.")
         sh.mkdir("-p", self.p('firefox'))
-        call("cd %s;. bin/activate && cd %s; cfx xpi; mv %s.xpi %s/%s.%s.xpi" % (
+        call("cd %s;. bin/activate > /dev/null && cd %s; cfx xpi; mv %s.xpi %s/%s.%s.xpi" % (
             self.bi('/firefox/addon-sdk-1.15'), 
             self.b('firefox'), 
             settings['codename'],
