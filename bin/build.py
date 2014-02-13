@@ -67,7 +67,8 @@ class BuildBaseController(controller.CementBaseController):
         ))
 
         # browsreify the background
-        os.system("browserify --noparse='%s' %s > %s/bundle.js" % (
+        os.system("browserify --noparse='%s' --noparse='%s' %s > %s/bundle.js" % (
+            self._s('js/background/storage/simple.js'),
             self._s('js/background/api/firefox.js'),
             self._s('js/background/main.js'),
             self._s('js/background')

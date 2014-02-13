@@ -1,7 +1,7 @@
 // Strategy pattern to get the correct storage mechanism
 var storage = (function() {
     var LocalStorage = require('./storage/local').LocalStorage;
-    var SimpleStorage = require('./storage/local').SimpleStorage;
+    var SimpleStorage = require('./storage/simple').SimpleStorage;
     var instance;
 
     function init() {
