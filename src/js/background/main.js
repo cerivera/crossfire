@@ -1,10 +1,12 @@
 var api = require('./api.js').api.get();
-
-api.onMessage("bgDo", function(request, tab) {
-   // TODO store something in cache?
-});
+var storage = require('./storage.js').storage.get();
 
 api.onClick(function(tab) {
-    // TODO send cached data
-    api.sendMessage(tab, "csDo");
+    api.sendMessage(tab, 'incCounter', {
+        counter: parseInt(storage.get('counter')) || 0
+    });
+});
+
+api.onMessage('storeCounter', function(request, tab) {
+    storage.set('counter', request.counter);
 });

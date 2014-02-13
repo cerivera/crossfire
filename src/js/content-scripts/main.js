@@ -1,9 +1,7 @@
 var api = require('./api.js').api.get();
 
-api.onMessage("csDo", function(request) {
-    // TODO spit out cached data
-    alert("Content Script");
-    setTimeout(function() {
-        api.sendMessage("bgDo");
-    }, 2000);
+api.onMessage('incCounter', function(request) {
+    var counter = (request.counter || 0) + 1;
+    alert('counter: ' + counter);
+    api.sendMessage('storeCounter', {counter: counter});
 });

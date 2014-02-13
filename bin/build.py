@@ -11,10 +11,9 @@ from subprocess import call
 class BuildBaseController(controller.CementBaseController):
     class Meta:
         label = 'base'
-        description = 'Base Description'
+        description = 'description'
 
         arguments = [
-            (['-dm', '--debug-mode'], dict(action='store_true', help='Enable log statements in browser console.'))
         ]
 
     @controller.expose(hide=True, aliases=['run'])
@@ -23,24 +22,24 @@ class BuildBaseController(controller.CementBaseController):
 
     @controller.expose(help="Builds extensions")
     def build(self):
-        self.init_paths()
+        self._init_paths()
 
-        settings['firefox_id'] = self.get_jid()
+        settings['firefox_id'] = self._get_jid()
 
         sh.rm("-rf", self.paths['builds'])
         sh.rm("-rf", self.paths['sandbox'])
 
         sh.mkdir(self.paths['builds'])
-        self.build_sandbox() 
-        self.build_chrome()
-        self.build_safari()
-        self.build_firefox()
+        self._build_sandbox() 
+        self._build_chrome()
+        self._build_safari()
+        self._build_firefox()
 
-        self.package_firefox()
+        self._package_firefox()
 
         sh.rm("-r", self.paths['sandbox'])
 
-    def init_paths(self):
+    def _init_paths(self):
         self.log.info("Setting up paths")
 
         self.paths = {
@@ -53,129 +52,127 @@ class BuildBaseController(controller.CementBaseController):
         self.paths['builds'] = path(self.paths['root'] + '/builds')
         self.paths['packages'] = path(self.paths['root'] + '/packages')
 
-    def build_sandbox(self):
+    def _build_sandbox(self):
         self.log.info("Building sandbox.");
 
         # Create sandbox of our codebase
         util.cp(self.paths['src'], self.paths['sandbox'])
-        util.cp(self.s('js/common/*'), self.s('js/background'))
-        util.cp(self.s('js/common/*'), self.s('js/content-scripts'))
+        util.cp(self._s('js/common/*'), self._s('js/background'))
+        util.cp(self._s('js/common/*'), self._s('js/content-scripts'))
 
         # browserify the content-scripts
         os.system("browserify %s > %s/bundle.js" % (
-            self.s('js/content-scripts/main.js'),
-            self.s('js/content-scripts')
+            self._s('js/content-scripts/main.js'),
+            self._s('js/content-scripts')
         ))
 
         # browsreify the background
         os.system("browserify --noparse='%s' %s > %s/bundle.js" % (
-            self.s('js/background/api/firefox.js'),
-            self.s('js/background/main.js'),
-            self.s('js/background')
+            self._s('js/background/api/firefox.js'),
+            self._s('js/background/main.js'),
+            self._s('js/background')
         ))
 
-        self.process_jinja2_files({
+        self._process_jinja2_files({
             "settings": settings,
-            "args": {
-                "debug_mode" : "true" if self.pargs.debug_mode else "false"
-            }
+            "args": {}
         })
 
-    def build_chrome(self):
+    def _build_chrome(self):
         self.log.info("Building chrome.")
 
-        sh.mkdir("-p", self.b('chrome/js/background'))
-        sh.mkdir("-p", self.b('chrome/js/content-scripts'))
+        sh.mkdir("-p", self._b('chrome/js/background'))
+        sh.mkdir("-p", self._b('chrome/js/content-scripts'))
 
-        util.cp(self.s('css'), self.b('chrome'))
-        util.cp(self.s('images'), self.b('chrome'))
-        util.cp(self.s('templates/common'), self.b('chrome/templates'))
-        util.cp(self.s('metadata/chrome/*'), self.b('chrome'))
-        util.cp(self.s('js/background/bundle.js'), self.b('chrome/js/background'))
-        util.cp(self.s('js/content-scripts/bundle.js'), self.b('chrome/js/content-scripts'))
+        util.cp(self._s('css'), self._b('chrome'))
+        util.cp(self._s('images'), self._b('chrome'))
+        util.cp(self._s('templates/common'), self._b('chrome/templates'))
+        util.cp(self._s('metadata/chrome/*'), self._b('chrome'))
+        util.cp(self._s('js/background/bundle.js'), self._b('chrome/js/background'))
+        util.cp(self._s('js/content-scripts/bundle.js'), self._b('chrome/js/content-scripts'))
 
-    def build_safari(self):
+    def _build_safari(self):
         self.log.info("Building safari.")
 
-        sh.mkdir("-p", self.b('safari/js'))
+        sh.mkdir("-p", self._b('safari/js'))
 
-        util.cp(self.s('css'), self.b('safari'))
-        util.cp(self.s('images'), self.b('safari'))
-        util.cp(self.s('templates/common'), self.b('safari/templates'))
-        util.cp(self.s('templates/safari/*'), self.b('safari/templates'))
-        util.cp(self.s('metadata/safari/*'), self.b('safari'))
-        util.cp(self.s('images/safari-icon.png'), self.b('safari/icon.png'))
-        util.cp(self.s('js/background/bundle.js'), self.b('safari/js/background'))
-        util.cp(self.s('js/content-scripts/bundle.js'), self.b('safari/js/content-scripts'))
+        util.cp(self._s('css'), self._b('safari'))
+        util.cp(self._s('images'), self._b('safari'))
+        util.cp(self._s('templates/common'), self._b('safari/templates'))
+        util.cp(self._s('templates/safari/*'), self._b('safari/templates'))
+        util.cp(self._s('metadata/safari/*'), self._b('safari'))
+        util.cp(self._s('images/safari-icon.png'), self._b('safari/icon.png'))
+        util.cp(self._s('js/background/bundle.js'), self._b('safari/js/background'))
+        util.cp(self._s('js/content-scripts/bundle.js'), self._b('safari/js/content-scripts'))
 
-    def build_firefox(self):
+    def _build_firefox(self):
         self.log.info("Building firefox.")
 
-        sh.mkdir("-p", self.b('firefox/data/js'))
-        sh.mkdir("-p", self.b('firefox/lib'))
+        sh.mkdir("-p", self._b('firefox/data/js'))
+        sh.mkdir("-p", self._b('firefox/lib'))
 
         # Content Scripts
-        util.cp(self.s('css'), self.b('firefox/data'))
-        util.cp(self.s('images'), self.b('firefox/data'))
-        util.cp(self.s('templates/common'), self.b('firefox/data/templates'))
-        util.cp(self.s('js/content-scripts/bundle.js'), self.b('firefox/data/js'))
+        util.cp(self._s('css'), self._b('firefox/data'))
+        util.cp(self._s('images'), self._b('firefox/data'))
+        util.cp(self._s('templates/common'), self._b('firefox/data/templates'))
+        util.cp(self._s('js/content-scripts/bundle.js'), self._b('firefox/data/js'))
 
         # Background
-        util.cp(self.s('js/background/*'), self.b('firefox/lib'))
+        util.cp(self._s('js/background/*'), self._b('firefox/lib'))
 
         # Metadata
-        util.cp(self.s('metadata/firefox/*'), self.b('firefox'))
+        util.cp(self._s('metadata/firefox/*'), self._b('firefox'))
 
 
-    def package_firefox(self):
+    def _package_firefox(self):
         self.log.info("Package firefox.")
-        sh.mkdir("-p", self.p('firefox'))
+        sh.mkdir("-p", self._p('firefox'))
         call("cd %s;. bin/activate > /dev/null && cd %s; cfx xpi; mv %s.xpi %s/%s.%s.xpi" % (
-            self.bi('/firefox/addon-sdk-1.15'), 
-            self.b('firefox'), 
+            self._bi('/firefox/addon-sdk-1.15'), 
+            self._b('firefox'), 
             settings['codename'],
-            self.p('firefox'), 
+            self._p('firefox'), 
             settings['codename'],
             settings['version']
         ), shell=True)
 
-    def get_jid(self):
+    def _get_jid(self):
         try:
-            f = open(self.bi('jid'))
+            f = open(self._bi('jid'))
             jid = f.read().strip()
         except:
             # Use the addon-sdk to generate a jID for the firefox project
             import sys
-            sys.path.append(self.bi('firefox/addon-sdk-1.15/python-lib/cuddlefish'))
+            sys.path.append(self._bi('firefox/addon-sdk-1.15/python-lib/cuddlefish'))
             from preflight import create_jid
             jid = create_jid()
 
-            f = open(self.bi('jid'), 'w') 
+            f = open(self._bi('jid'), 'w') 
             f.write(jid)
             f.close()
 
         return jid
 
-    def minify(self):
+    def _minify(self):
         self.log.info("Minifying.")
 
     # get absolute path in sandbox/
-    def s(self, _path):
+    def _s(self, _path):
         return path(self.paths['sandbox'] + '/' + _path)
 
     # get absolute path in builds/
-    def b(self, _path):
+    def _b(self, _path):
         return path(self.paths['builds'] + '/' + _path)
 
     # get absolute path in packages/
-    def p(self, _path):
+    def _p(self, _path):
         return path(self.paths['packages'] + '/' + _path)
 
     # get absolute path in bin/
-    def bi(self, _path):
+    def _bi(self, _path):
         return path(self.paths['bin'] + '/' + _path)
 
-    def process_jinja2_files(self, data):
+    def _process_jinja2_files(self, data):
         self.log.info("Processing Jinja2 files.")
         for jf in sh.find(self.paths['sandbox'], "-name", "*.j2"):
             jf = jf.strip()
